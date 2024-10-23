@@ -20,12 +20,13 @@ stock_symbols = [
     'AMBUJACEM.NS',
     'APLAPOLLO.NS',
     'APOLLOTYRE.NS',
-    'ASHOKLEY.NS',
     'ASIANPAINT.NS',
+    'ASHOKLEY.NS',
     'ASTRAL.NS',
     'AUROPHARMA.NS',
     'AXISBANK.NS',
     'BAJAJ-AUTO.NS',
+    'BALKRISIND.NS',
     'BANKBARODA.NS',
     'BATAINDIA.NS',
     'BEL.NS',
@@ -36,7 +37,6 @@ stock_symbols = [
     'BHEL.NS',
     'BRITANNIA.NS',
     'CANBK.NS',
-    'CHAMBLFERT.NS',
     'CIPLA.NS',
     'COALINDIA.NS',
     'CONCOR.NS',
@@ -47,8 +47,11 @@ stock_symbols = [
     'DEVYANI.NS',
     'EICHERMOT.NS',
     'FSL.NS',
+    'GAIL.NS',
+    'GNFC.NS',
     'GODFRYPHLP.NS',
     'GODREJCP.NS',
+    'GRANULES.NS',
     'GRASIM.NS',
     'GRSE.NS',
     'HAL.NS',
@@ -62,15 +65,15 @@ stock_symbols = [
     'HINDZINC.NS',
     'ICICIBANK.NS',
     'IEX.NS',
-    'INDIACEM.NS',
+    'INDHOTEL.NS',
     'INDIAMART.NS',
     'INDUSINDBK.NS',
+    'INDUSTOWER.NS',
     'INFY.NS',
     'INTELLECT.NS',
     'ITC.NS',
     'JINDALSTEL.NS',
     'JIOFIN.NS',
-    'JKCEMENT.NS',
     'JSWSTEEL.NS',
     'KOTAKBANK.NS',
     'KPITTECH.NS',
@@ -79,8 +82,8 @@ stock_symbols = [
     'M&M.NS',
     'MARICO.NS',
     'MARUTI.NS',
-    'MPHASIS.NS',
-    'MRF.NS',
+    'MOTHERSON.NS',
+    'MRPL.NS',
     'NATIONALUM.NS',
     'NESTLEIND.NS',
     'NMDC.NS',
@@ -91,13 +94,10 @@ stock_symbols = [
     'POLYCAB.NS',
     'POLYPLEX.NS',
     'POWERGRID.NS',
-    'RAMCOCEM.NS',
     'RAYMOND.NS',
     'RELIANCE.NS',
-    'RENUKA.NS',
     'SAIL.NS',
     'SBIN.NS',
-    'SIEMENS.NS',
     'SIRCA.NS',
     'SRF.NS',
     'STARCEMENT.NS',
@@ -182,10 +182,10 @@ def calculate_bollinger_and_rsi(data_1h, data_daily, data_minute):
             print("Not enough data after resampling to calculate Bollinger Bands")
             return None, None, None, None
     
-        bbands = ta.bbands(data_2h['OHLC4'], length=26, std=2, mamode='ema')
+        bbands = ta.bbands(data_2h['OHLC4'], length=120, std=2, mamode='ema')
         data_2h = data_2h.join(bbands)
-        data_2h['Bollinger_%b'] = ((data_2h['OHLC4'] - data_2h['BBL_26_2.0']) /
-                                    (data_2h['BBU_26_2.0'] - data_2h['BBL_26_2.0'])) * 100
+        data_2h['Bollinger_%b'] = ((data_2h['OHLC4'] - data_2h['BBL_120_2.0']) /
+                                    (data_2h['BBU_120_2.0'] - data_2h['BBL_120_2.0'])) * 100
         bollinger_b = data_2h['Bollinger_%b'].iloc[-1]
     
         # Current value
